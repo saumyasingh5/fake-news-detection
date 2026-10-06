@@ -1,0 +1,629 @@
+/* =====================================================
+   MAIN BACKGROUND
+   ===================================================== */
+
+.stApp {
+    background:
+        radial-gradient(circle at 20% 20%, #172554, transparent 35%),
+        radial-gradient(circle at 80% 80%, #24104f, transparent 35%),
+        #050814;
+
+    color: white;
+}
+
+.block-container {
+    max-width: 1250px;
+    padding-top: 35px;
+    padding-bottom: 30px;
+
+    position: relative;
+    z-index: 10;
+}
+
+
+/* =====================================================
+   MOVING NEWS HEADLINES
+   ===================================================== */
+
+.news-bg {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    opacity: 0.09;
+}
+
+
+.news-row {
+    position: absolute;
+
+    width: max-content;
+
+    white-space: nowrap;
+
+    color: #9bb8ff;
+
+    font-size: 65px;
+
+    font-weight: 800;
+
+    letter-spacing: 5px;
+
+    animation: moveNews 30s linear infinite;
+}
+
+
+.row1 {
+    top: 18%;
+    left: -100%;
+}
+
+
+.row2 {
+    top: 48%;
+    left: -100%;
+
+    animation-duration: 38s;
+
+    animation-direction: reverse;
+}
+
+
+.row3 {
+    top: 78%;
+    left: -100%;
+
+    animation-duration: 32s;
+}
+
+
+@keyframes moveNews {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(180%);
+    }
+
+}
+
+
+/* =====================================================
+   SMALL BACKGROUND NEWSPAPERS
+   ===================================================== */
+
+.background-papers {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    opacity: 0.18;
+}
+
+
+.mini-paper {
+    position: absolute;
+
+    width: 145px;
+
+    height: 100px;
+
+    padding: 12px;
+
+    background: #eee8d8;
+
+    color: #222;
+
+    font-family: Georgia, serif;
+
+    font-size: 10px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+
+    border-radius: 3px;
+
+    text-align: center;
+
+    transition: 0.3s;
+}
+
+
+.mini-paper b {
+    font-size: 13px;
+}
+
+
+.mini1 {
+    top: 12%;
+    left: 3%;
+
+    transform: rotate(-12deg);
+}
+
+
+.mini2 {
+    top: 32%;
+    right: 3%;
+
+    transform: rotate(10deg);
+}
+
+
+.mini3 {
+    bottom: 18%;
+    left: 5%;
+
+    transform: rotate(8deg);
+}
+
+
+.mini4 {
+    top: 65%;
+    right: 7%;
+
+    transform: rotate(-9deg);
+}
+
+
+.mini5 {
+    bottom: 5%;
+    left: 43%;
+
+    transform: rotate(-5deg);
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.main-title {
+    text-align: center;
+
+    color: white;
+
+    font-size: 48px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 8px;
+}
+
+
+.tagline {
+    text-align: center;
+
+    color: #aebbd7;
+
+    font-size: 18px;
+
+    margin-bottom: 45px;
+}
+
+
+/* =====================================================
+   LEFT INFORMATION
+   ===================================================== */
+
+.info-box {
+    background: rgba(13, 24, 49, 0.96);
+
+    border: 1px solid #354a78;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    min-height: 390px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.45);
+}
+
+
+.info-box h2 {
+    color: white;
+
+    font-size: 27px;
+
+    margin-bottom: 20px;
+}
+
+
+.info-box p {
+    color: #c4cde0;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+}
+
+
+.info-box b {
+    color: #42e879;
+}
+
+
+.feature {
+    background: #172443;
+
+    border-left: 4px solid #6366f1;
+
+    border-radius: 10px;
+
+    padding: 14px;
+
+    margin-top: 13px;
+
+    color: white;
+
+    font-size: 16px;
+}
+
+
+/* =====================================================
+   NEWSPAPER MAIN BOX
+   ===================================================== */
+
+.news-box {
+    background: rgba(10, 22, 45, 0.96);
+
+    border: 1px solid #354a78;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    min-height: 390px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.35);
+}
+
+
+.news-box h2 {
+    color: white;
+
+    font-size: 27px;
+
+    margin-top: 0;
+
+    margin-bottom: 25px;
+}
+
+
+/* =====================================================
+   NEWSPAPERS
+   ===================================================== */
+
+.papers {
+    display: flex;
+
+    gap: 22px;
+}
+
+
+.paper {
+    position: relative;
+
+    width: 50%;
+
+    min-height: 320px;
+
+    padding: 22px;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            #f4efdf,
+            #f4efdf 3px,
+            #eee7d5 4px
+        );
+
+    color: #171717;
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 15px 30px rgba(0,0,0,0.5);
+}
+
+
+.paper:first-child {
+    transform: rotate(-1deg);
+}
+
+
+.paper:last-child {
+    transform: rotate(1deg);
+}
+
+
+.paper-name {
+    text-align: center;
+
+    font-family: Georgia, serif;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+}
+
+
+.date {
+    text-align: center;
+
+    font-family: Georgia, serif;
+
+    font-size: 9px;
+
+    color: #555;
+
+    margin-top: 5px;
+}
+
+
+.line {
+    border-top: 2px solid #222;
+
+    margin: 10px 0 15px;
+}
+
+
+.paper h3 {
+    font-family: Georgia, serif;
+
+    font-size: 23px;
+
+    color: #111;
+}
+
+
+.paper p {
+    font-family: Georgia, serif;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    color: #222;
+}
+
+
+/* =====================================================
+   REAL STAMP
+   ===================================================== */
+
+.real-stamp {
+    display: inline-block;
+
+    color: #078337;
+
+    border: 4px solid #078337;
+
+    padding: 7px 17px;
+
+    border-radius: 7px;
+
+    font-size: 23px;
+
+    font-weight: 900;
+
+    transform: rotate(-10deg);
+
+    margin-top: 18px;
+}
+
+
+/* =====================================================
+   FAKE STAMP
+   ===================================================== */
+
+.fake-stamp {
+    display: inline-block;
+
+    color: #c52222;
+
+    border: 4px solid #c52222;
+
+    padding: 7px 17px;
+
+    border-radius: 7px;
+
+    font-size: 23px;
+
+    font-weight: 900;
+
+    transform: rotate(10deg);
+
+    margin-top: 18px;
+}
+
+
+/* =====================================================
+   PAPER FOOTER
+   ===================================================== */
+
+.paper-footer {
+    position: absolute;
+
+    bottom: 12px;
+
+    left: 20px;
+
+    right: 20px;
+
+    border-top: 1px solid #555;
+
+    padding-top: 6px;
+
+    text-align: center;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =====================================================
+   INPUT
+   ===================================================== */
+
+.input-title {
+    color: white;
+
+    font-size: 26px;
+
+    font-weight: 700;
+
+    margin-top: 45px;
+
+    margin-bottom: 12px;
+}
+
+
+.stTextArea textarea {
+    background: #101a33 !important;
+
+    color: white !important;
+
+    border: 1px solid #40547e !important;
+
+    border-radius: 13px !important;
+
+    font-size: 16px !important;
+}
+
+
+/* =====================================================
+   BUTTON
+   ===================================================== */
+
+.stButton > button {
+    height: 52px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   RESULT
+   ===================================================== */
+
+.result-box {
+    background: #111c38;
+
+    border: 1px solid #41547e;
+
+    border-radius: 15px;
+
+    padding: 22px;
+
+    margin-top: 20px;
+
+    color: white;
+}
+
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+.footer {
+    text-align: center;
+
+    margin-top: 55px;
+
+    padding-top: 22px;
+
+    border-top: 1px solid #293a60;
+
+    color: #9caac5;
+
+    font-size: 15px;
+}
+
+
+.footer-title {
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+
+.footer b {
+    color: white;
+}
+
+
+.footer-small {
+    color: #687895;
+
+    font-size: 12px;
+
+    margin-top: 6px;
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+    .main-title {
+        font-size: 36px;
+    }
+
+    .papers {
+        flex-direction: column;
+    }
+
+    .paper {
+        width: 100%;
+    }
+
+    .mini-paper {
+        display: none;
+    }
+
+}
