@@ -1,8 +1,11 @@
-
 import streamlit as st
-from backend import detect_news
-from pathlib import Path
 
+from backend import detect_news
+
+
+# =====================================================
+# PAGE CONFIG
+# =====================================================
 
 st.set_page_config(
     page_title="Fake News Detection",
@@ -11,90 +14,371 @@ st.set_page_config(
 )
 
 
-# Load the existing stylesheet
-css_path = Path(__file__).parent / "style.css"
+# =====================================================
+# LOAD CSS
+# =====================================================
 
-if css_path.exists():
+with open("style.css", "r", encoding="utf-8") as f:
+
     st.markdown(
-        f"<style>{css_path.read_text(encoding='utf-8')}</style>",
+        "<style>" + f.read() + "</style>",
         unsafe_allow_html=True
     )
 
 
-st.title("📰 Fake News Detection System")
+# =====================================================
+# MOVING BACKGROUND NEWS
+# =====================================================
 
-st.write(
-    "Analyze a news claim using AI, web search and available "
-    "fact-check reports."
+st.markdown(
+    '<div class="news-bg">'
+    '<div class="news-row row1">'
+    'BREAKING NEWS • AI TECHNOLOGY • GLOBAL UPDATE • DIGITAL NEWS • '
+    'BREAKING NEWS • AI TECHNOLOGY • GLOBAL UPDATE •'
+    '</div>'
+
+    '<div class="news-row row2">'
+    'LATEST UPDATE • WORLD NEWS • TECHNOLOGY NEWS • '
+    'VERIFY BEFORE YOU SHARE • LATEST UPDATE • WORLD NEWS •'
+    '</div>'
+
+    '<div class="news-row row3">'
+    'NEWS ALERT • FACT CHECK • TODAY NEWS • IMPORTANT UPDATE • '
+    'NEWS ALERT • FACT CHECK • TODAY NEWS •'
+    '</div>'
+
+    '</div>',
+    unsafe_allow_html=True
 )
 
-st.info(
-    "The result is an AI-assisted assessment, not a guarantee "
-    "of truth. Always check the linked sources."
+
+# =====================================================
+# SMALL NEWSPAPERS IN BACKGROUND
+# =====================================================
+
+st.markdown(
+    '<div class="background-papers">'
+
+    '<div class="mini-paper mini1">'
+    'THE DAILY<br>'
+    '<b>BREAKING NEWS</b><br>'
+    'Latest Update'
+    '</div>'
+
+    '<div class="mini-paper mini2">'
+    'NEWS TODAY<br>'
+    '<b>WORLD NEWS</b><br>'
+    'Fact Check'
+    '</div>'
+
+    '<div class="mini-paper mini3">'
+    'DAILY TIMES<br>'
+    '<b>AI NEWS</b><br>'
+    'Technology'
+    '</div>'
+
+    '<div class="mini-paper mini4">'
+    'NEWS ALERT<br>'
+    '<b>TOP STORY</b><br>'
+    'Verified News'
+    '</div>'
+
+    '<div class="mini-paper mini5">'
+    'THE TRUTH<br>'
+    '<b>NEWS UPDATE</b><br>'
+    'Read Carefully'
+    '</div>'
+
+    '</div>',
+    unsafe_allow_html=True
 )
 
 
-left, right = st.columns(2)
+# =====================================================
+# MAIN TITLE
+# =====================================================
+
+st.markdown(
+    '<div class="main-title">'
+    '📰 Fake News Detection'
+    '</div>',
+    unsafe_allow_html=True
+)
+
+
+st.markdown(
+    '<div class="tagline">'
+    'AI-Powered News Verification System'
+    '</div>',
+    unsafe_allow_html=True
+)
+
+
+# =====================================================
+# MAIN COLUMNS
+# =====================================================
+
+left, right = st.columns(
+    [1, 2],
+    gap="large"
+)
+
+
+# =====================================================
+# LEFT SIDE
+# =====================================================
 
 with left:
-    st.markdown("### 🔎 How it works")
-    st.write("1. Enter a news claim.")
-    st.write("2. Search for supporting or contradicting evidence.")
-    st.write("3. Review the prediction and source links.")
+
+    st.markdown(
+        '<div class="info-box">'
+
+        '<h2>🔍 What We Do?</h2>'
+
+        '<p>'
+        'Fake News Detection System helps users analyze news '
+        'and identify whether the information is likely to be '
+        '<b>REAL</b> or <b>FAKE</b>.'
+        '</p>'
+
+        '<p>'
+        'Enter a news headline or article and our AI system '
+        'analyzes the information to provide a prediction.'
+        '</p>'
+
+        '<div class="feature">'
+        '⚡ Fast Analysis'
+        '</div>'
+
+        '<div class="feature">'
+        '🤖 AI Based Detection'
+        '</div>'
+
+        '<div class="feature">'
+        '📰 News Verification'
+        '</div>'
+
+        '</div>',
+
+        unsafe_allow_html=True
+    )
+
+
+# =====================================================
+# RIGHT SIDE - NEWSPAPER PREVIEW
+# =====================================================
 
 with right:
-    st.markdown("### 🛡️ Prediction guide")
-    st.write("**REAL:** Reliable evidence supports the claim.")
-    st.write("**FAKE:** Reliable evidence disproves the claim.")
-    st.write("**UNCERTAIN:** Evidence is insufficient or conflicting.")
+
+    st.markdown(
+        '<div class="news-box">'
+
+        '<h2>🗞️ News Verification</h2>'
+
+        '<div class="papers">'
+
+        # =============================================
+        # REAL NEWSPAPER
+        # =============================================
+
+        '<div class="paper">'
+
+        '<div class="paper-name">'
+        'THE DAILY TRUTH'
+        '</div>'
+
+        '<div class="date">'
+        'TRUSTED NEWS • 2026'
+        '</div>'
+
+        '<div class="line"></div>'
+
+        '<h3>'
+        'Breaking News'
+        '</h3>'
+
+        '<p>'
+        'Scientists announce a major discovery '
+        'that could change the future of technology.'
+        '</p>'
+
+        '<div class="real-stamp">'
+        '✓ REAL'
+        '</div>'
+
+        '<div class="paper-footer">'
+        'VERIFIED NEWS'
+        '</div>'
+
+        '</div>'
 
 
-st.markdown("---")
-st.subheader("Check a news claim")
+        # =============================================
+        # FAKE NEWSPAPER
+        # =============================================
 
-news = st.text_area(
-    "Paste the news headline or claim here:",
-    height=160,
-    placeholder=(
-        "Example: Paste a news headline, statement, "
-        "or an older news claim..."
+        '<div class="paper">'
+
+        '<div class="paper-name">'
+        'DAILY ALERT'
+        '</div>'
+
+        '<div class="date">'
+        'DAILY NEWS • 2026'
+        '</div>'
+
+        '<div class="line"></div>'
+
+        '<h3>'
+        'Shocking News!'
+        '</h3>'
+
+        '<p>'
+        'Government announces free smartphones '
+        'for every citizen starting tomorrow.'
+        '</p>'
+
+        '<div class="fake-stamp">'
+        '✕ FAKE'
+        '</div>'
+
+        '<div class="paper-footer">'
+        'SUSPICIOUS NEWS'
+        '</div>'
+
+        '</div>'
+
+        '</div>'
+
+        '</div>',
+
+        unsafe_allow_html=True
     )
+
+
+# =====================================================
+# INPUT SECTION
+# =====================================================
+
+st.markdown(
+    '<div class="input-title">'
+    '📝 Check Your News'
+    '</div>',
+    unsafe_allow_html=True
 )
 
-if st.button("🔍 Analyze News", use_container_width=True):
-    if not news.strip():
-        st.warning("Please enter a news claim first.")
+
+news = st.text_area(
+    "News",
+    placeholder=(
+        "Paste your news headline or article here..."
+    ),
+    height=150,
+    label_visibility="collapsed"
+)
+
+
+# =====================================================
+# ANALYZE BUTTON
+# =====================================================
+
+if st.button(
+    "🔍 ANALYZE NEWS",
+    use_container_width=True
+):
+    # CHECK EMPTY INPUT
+    if news.strip() == "":
+
+        st.warning(
+            "⚠️ Please enter some news first."
+        )
+
+
     else:
+
+        # =========================================
+        # CALL BACKEND
+        # =========================================
+
         prediction, reason, error_text = detect_news(news)
 
+
+        # =========================================
+        # ERROR
+        # =========================================
+
         if error_text:
-            st.error(error_text)
 
-        else:
-            st.markdown("---")
-            st.subheader("📊 Detection Report")
+            if "503" in error_text:
 
-            if prediction == "REAL":
-                st.success("MODEL PREDICTION: REAL")
-            elif prediction == "FAKE":
-                st.error("MODEL PREDICTION: FAKE")
+                st.error(
+                    "⚠️ Gemini server is currently busy. "
+                    "Please try again after a few minutes."
+                )
+
             else:
-                st.warning("MODEL PREDICTION: UNCERTAIN")
 
-            st.markdown("### 🤖 AI Explanation")
-            st.markdown(reason)
+                st.error(
+                    "❌ Gemini API connection error."
+                )
 
             st.caption(
-                "Verification status: Check the evidence and "
-                "source links above. A prediction alone is not "
-                "confirmed verification."
+                error_text
             )
 
 
-st.markdown("---")
+        # =========================================
+        # SHOW RESULT
+        # =========================================
+
+        else:
+
+            if prediction == "FAKE":
+
+                st.error("❌ FAKE NEWS")
+
+
+            elif prediction == "REAL":
+
+                st.success("✅ REAL NEWS")
+
+
+            else:
+
+                st.warning("⚠️ UNCERTAIN NEWS")
+
+
+            st.markdown(
+                f"**Prediction:** {prediction}"
+            )
+
+
+            st.markdown(
+                f"**Reason:** {reason}"
+            )
+
+
+# =====================================================
+# FOOTER
+# =====================================================
+
 st.markdown(
-    "<div style='text-align:center;'>"
-    "Developed by Saumya Singh & Shruti Tiwari"
-    "</div>",
+    '<div class="footer">'
+
+    '<div class="footer-title">'
+    '📰 Fake News Detection System'
+    '</div>'
+
+    '<div>'
+    'Developed by '
+    '<b>Saumya Singh & Shruti Tiwari</b>'
+    '</div>'
+
+    '<div class="footer-small">'
+    'AI-Powered News Verification'
+    '</div>'
+
+    '</div>',
+
     unsafe_allow_html=True
-)
+) 
