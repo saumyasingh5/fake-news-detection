@@ -1,5 +1,5 @@
 import streamlit as st
-
+from auth import init_db, create_user, authenticate_user
 from backend import detect_news
 
 
@@ -24,6 +24,184 @@ with open("style.css", "r", encoding="utf-8") as f:
         "<style>" + f.read() + "</style>",
         unsafe_allow_html=True
     )
+
+# =====================================================
+# LOGIN AND SIGNUP SYSTEM
+# =====================================================
+
+init_db()
+
+if "authenticated_user" not in st.session_state:
+    st.session_state.authenticated_user = None
+
+if st.session_state.authenticated_user is None:
+
+    st.markdown("""
+        <style>
+        /* Clean login page background */
+        .stApp,
+        [data-testid="stAppViewContainer"] {
+            background: #f4f6fa !important;
+        }
+
+        [data-testid="stHeader"] {
+            background: transparent !important;
+        }
+
+        /* Center the login content */
+        [data-testid="stMainBlockContainer"] {
+            max-width: 850px;
+            padding-top: 2rem;
+        }
+
+        /* Login heading */
+        h1 {
+            color: #10213a !important;
+            text-align: center;
+            font-size: 2.5rem !important;
+        }
+
+        /* Subtitle */
+        [data-testid="stMarkdownContainer"] p {
+            color: #475569;
+        }
+
+        /* Visible Login and Create Account tabs */
+        [data-testid="stTabs"] button {
+            color: #10213a !important;
+        }
+
+        [data-testid="stTabs"] button[aria-selected="true"] {
+            color: #dc2626 !important;
+            border-bottom-color: #dc2626 !important;
+        }
+
+        /* White form card */
+        [data-testid="stForm"] {
+            background: #ffffff !important;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown(
+        "<h1 style='text-align:center;'>📰 Fake News Detection</h1>",
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        "<p style='text-align:center;'>"
+        "Sign in to access your news analysis dashboard."
+        "</p>",
+        unsafe_allow_html=True
+    )
+
+    login_tab, signup_tab = st.tabs(
+        ["Login", "Create Account"]
+    )
+
+    with login_tab:
+        with st.form("login_form"):
+            identifier = st.text_input(
+                "Username or Email"
+            )
+            password = st.text_input(
+                "Password",
+                type="password"
+            )
+
+            login_clicked = st.form_submit_button(
+                "Login",
+                use_container_width=True
+            )
+
+        if login_clicked:
+            if not identifier.strip() or not password:
+                st.warning(
+                    "Enter your username/email and password."
+                )
+            else:
+                user = authenticate_user(
+                    identifier,
+                    password
+                )
+
+                if user:
+                    st.session_state.authenticated_user = user
+                    st.rerun()
+                else:
+                    st.error(
+                        "Invalid username/email or password."
+                    )
+
+    with signup_tab:
+        with st.form("signup_form"):
+            username = st.text_input(
+                "Choose Username"
+            )
+            email = st.text_input(
+                "Email Address"
+            )
+            new_password = st.text_input(
+                "Create Password",
+                type="password"
+            )
+            confirm_password = st.text_input(
+                "Confirm Password",
+                type="password"
+            )
+
+            signup_clicked = st.form_submit_button(
+                "Create Account",
+                use_container_width=True
+            )
+
+        if signup_clicked:
+            if not all([
+                username.strip(),
+                email.strip(),
+                new_password,
+                confirm_password
+            ]):
+                st.warning("Please fill in all fields.")
+
+            elif new_password != confirm_password:
+                st.error("Passwords do not match.")
+
+            else:
+                success, message = create_user(
+                    username,
+                    email,
+                    new_password
+                )
+
+                if success:
+                    st.success(message)
+                    st.info(
+                        "Now open the Login tab to sign in."
+                    )
+                else:
+                    st.error(message)
+
+    st.stop()
+
+
+# =====================================================
+# LOGGED-IN USER AND LOGOUT
+# =====================================================
+
+current_user = st.session_state.authenticated_user
+
+with st.sidebar:
+    st.subheader("Your Account")
+    st.write(f"**{current_user['username']}**")
+    st.caption(current_user["email"])
+
+    if st.button("Logout", use_container_width=True):
+        st.session_state.authenticated_user = None
+        st.rerun()
 
 
 # =====================================================
